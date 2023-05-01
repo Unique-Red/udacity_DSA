@@ -5,7 +5,7 @@ except ImportError:
 
 config = {
     'description': 'My Project',
-    'author': 'My Name',
+    'author': 'Noah Useghan',
     'url': 'URL to get it at.',
     'download_url': 'Where to download it.',
     'author_email': 'vnoah410@gmail.com',
@@ -13,7 +13,7 @@ config = {
     'install_requires': ['nose'],
     'packages': ['gothons'],
     'scripts': [],
-    'name': 'gothons'
+    'name': 'ex47'
 }
 
 setup(**config)
