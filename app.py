@@ -1,35 +1,42 @@
-# you can write to stdout for debugging purposes, e.g.
-# print("this is a debug message")
+import requests
+import json
+import numpy as np
 
-A = [1, 3, 6, 4, 1, 2]
+def calculate_standard_deviation(numbers):
+    """
+    Calculate the standard deviation of a list of numbers using numpy.
+    """
+    return round(np.std(numbers))
 
-A = [1, 2, 3]
+def remove_outliers(numbers):
+    """
+    Remove the two largest outliers from a list of numbers.
+    """
+    sorted_numbers = sorted(numbers)
+    return sorted_numbers[:-2]
 
-# A = [ −1, −3]
+def get_number_list():
+    """
+    Retrieve the list of numbers from the API.
+    """
+    url = 'https://coderbyte.com/api/challenges/json/list-numbers'
+    response = requests.get(url)
+    data = json.loads(response.text)
+    return data['data']
 
-def solution(A):
-    # Implement your solution here
-    n = len(A)
-    if n == 0:
-        return 1
-    if n == 1:
-        if A[0] == 1:
-            return 2
-        else:
-            return 1
-    A.sort()
-    if A[0] > 1:
-        return 1
-        
-    for i in range(1, n):
-        if A[i] - A[i-1] > 1:
-            return A[i-1] + 1
-    return A[n-1] + 1
+def main():
+    # Step 1: Retrieve the list of numbers
+    numbers = get_number_list()
 
+    # Step 2: Calculate the original standard deviation
+    original_std_dev = calculate_standard_deviation(numbers)
 
+    # Step 3: Remove outliers and calculate modified standard deviation
+    modified_numbers = remove_outliers(numbers)
+    modified_std_dev = calculate_standard_deviation(modified_numbers)
 
+    # Step 4: Print the results
+    print(original_std_dev, modified_std_dev)
 
-print(solution(A))
-
-
-    # pass
+if __name__ == '__main__':
+    main()
